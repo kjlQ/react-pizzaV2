@@ -1,0 +1,20 @@
+.paginationList {
+  display: inline-flex;
+  li {
+    margin: 10px;
+    border-radius: 50px;
+    border: 1px solid #fe5f1e;
+    width: 40px;
+    height: 40px;
+    line-height: 41px;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .selected {
+    cursor: pointer;
+    background-color: #fe5f1e;
+    color: #fff;
+  }
+}
