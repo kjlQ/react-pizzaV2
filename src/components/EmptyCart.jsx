@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 function EmptyCart() {
   return(
     <div class="content">
@@ -9,9 +10,11 @@ function EmptyCart() {
               Вероятней всего, вы не заказывали ещё пиццу.<br />
               Для того, чтобы заказать пиццу, перейди на главную страницу.
             </p>
+           <Link to='/'>
             <a href="/" class="button button--black">
-              <span>Вернуться назад</span>
-            </a>
+                <span>Вернуться назад</span>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

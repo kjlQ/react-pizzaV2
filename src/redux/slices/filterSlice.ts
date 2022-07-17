@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
   categoryId: 0,
@@ -12,16 +12,16 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    changeCategoryId: (state,action) => {
+    changeCategoryId: (state,action:PayloadAction<number>) => {
       state.categoryId = action.payload
     },
-    changeSortId: (state,action) => {
+    changeSortId: (state,action:PayloadAction<string>) => {
       state.sortCategory = action.payload
     },
-    changePaginationPage: (state,action) => {
+    changePaginationPage: (state,action:PayloadAction<number>) => {
       state.paginationPage = action.payload
     },
-    onSearchChange: (state,action) => {
+    onSearchChange: (state,action:PayloadAction<string>) => {
       state.searchValue = action.payload
     },
   },

@@ -45,7 +45,7 @@
       "jquery": ["node_modules/jquery/dist/jquery"] // Путь относительно "baseUrl".
     },
     "lib": ["es5", "es6", "es2015.promise", "es2016.array.include"], // Набор библиотечных файлов полифилов, которые будут включены в итоговый выходной файл.
-    "jsx": "react", // Включать ли поддержку ".tsx" файлов?
+    "jsx": "react-jsx", // Включать ли поддержку ".tsx" файлов?
     "jsxFactory": "React.createElement", // Укажите фабричную функцию JSX, чтобы использовать, когда таргетинг реагирует на обработку JSX, например: 'React.createElement' или 'h'. Требуется TypeScript версии 2.1 или новее.
     "allowJs": false, // Разрешать компилировать файлы с JavaScript-кодом?
     "alwaysStrict": false, // Компилировать ли каждый файл в строгом режиме и создавать ли 'use strict' для каждого выходного файла? Требуется TypeScript версии 2.1 или новее.
@@ -113,5 +113,27 @@
     "strictFunctionTypes": false, // Отключить проверку бивариантных параметров для типов функций.
     "strictPropertyInitialization": false, // Убедитесь, что свойства класса, имеющие значения undefined, получают новые значения внутри конструктора.
     "traceResolution": false // Выводить в логи сообщения о нахождении путей до модулей.
+    "compilerOptions": {
+      "module": "esnext",
+      "target": "es2016",
+      "jsx": "react-jsx",
+      "strictFunctionTypes": true,
+      "sourceMap": true,
+      "outDir": "./build",
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "allowJs": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "noEmit": true
+    },
+    "exclude": ["node_modules", "**/node_modules/*"],
+    "include": ["src", "electron/renderer.ts"]
   },
 }

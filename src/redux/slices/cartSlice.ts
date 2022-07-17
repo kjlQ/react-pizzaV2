@@ -1,17 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 
-const initialState = {
+type itemType = {
+  id:number,
+  title:string,
+  price:number,
+  imageUrl:string,
+  activeType:string,
+  activeSize:string,
+  count:number,
+}
+
+
+type itemRemoveType = {
+  id:number;
+  activeType:string,
+  activeSize:string,
+}
+
+interface cartSliceState {
+  totalPrice:number,
+  items:itemType[],
+}
+
+const initialState:cartSliceState = {
   totalPrice:0,
   items: [],
 }
-
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state,action) => {
+    addItem: (state,action:PayloadAction<itemType>) => {
       const duplicatedItem = state.items.find(obj=>
         obj.id === action.payload.id && 
         obj.activeType === action.payload.activeType && 
@@ -24,19 +45,20 @@ export const cartSlice = createSlice({
       state.totalPrice = state.items.reduce((sum,obj)=>sum + (obj.price*obj.count),0)
     },
 
-    removeItem: (state,action) => {
-      const findRightItemCount = state.items.find(obj=>
+    removeItem: (state,action:PayloadAction<itemRemoveType>) => {
+      const duplicatedItem = state.items.find(obj=>
         obj.id === action.payload.id && 
         obj.activeType === action.payload.activeType && 
         obj.activeSize === action.payload.activeSize)
 
-      if (findRightItemCount.count>1) {
-        findRightItemCount.count--
+      if (duplicatedItem && duplicatedItem.count>1) {
+        duplicatedItem.count--
       }
+      
       state.totalPrice = state.items.reduce((sum,obj)=>sum + (obj.price*obj.count),0)
     },
 
-    removePosition(state,action) {
+    removePosition(state,action:PayloadAction<itemRemoveType>) {
       state.items = state.items.filter(obj=>
         obj.id !== action.payload.id ||
         obj.activeType !== action.payload.activeType ||
@@ -46,12 +68,13 @@ export const cartSlice = createSlice({
       state.totalPrice = state.items.reduce((sum,obj)=>sum + (obj.price*obj.count),0)
     },
 
-    removeAllPosition(state,action) {
+    removeAllPosition(state) {
       state.items = []
       state.totalPrice = state.items.reduce((sum,obj)=>sum + (obj.price*obj.count),0)
     }
   },
 })
+
 
 export const { addItem , removeItem , removePosition, removeAllPosition } = cartSlice.actions
 

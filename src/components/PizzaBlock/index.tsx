@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 import { addItem } from "../../redux/slices/cartSlice";
 
-function PizzaBlock({id,title,price,imageUrl,types,sizes}) {
+function PizzaBlock({id,title,price,imageUrl,types,sizes,count}) {
   const [pizzaCount , setPuzzaCount] = useState(0)
   const [activeType , setActiveType] = useState(0)
   const [activeSize , setActiveSize] = useState(0)
@@ -20,16 +20,26 @@ function PizzaBlock({id,title,price,imageUrl,types,sizes}) {
     setPuzzaCount(pizzaCount+1)
   }
 
-  const item = {
-    id,
-    title,
-    price,
-    imageUrl,
-    activeType:types==1?typeName[1]:typeName[activeType],
-    activeSize:sizes[activeSize],
+  type itemType = {
+    id:number,
+    title:string,
+    price:number,
+    imageUrl:string,
+    activeType:string,
+    activeSize:string,
+    count:number,
   }
 
   const addCurrentItem = () => {
+    const item:itemType = {
+      id,
+      title,
+      price,
+      imageUrl,
+      activeType:types==1?typeName[1]:typeName[activeType],
+      activeSize:sizes[activeSize],
+      count:0,
+    }
     dispatch(addItem(item))
   }
   
